@@ -1,0 +1,46 @@
+{
+  "name": "bunshin-claude",
+  "productName": "Bunshin",
+  "version": "0.1.0",
+  "description": "Multi-instance launcher for Claude Desktop (one isolated profile per instance).",
+  "keywords": [
+    "claude",
+    "claude-desktop",
+    "multi-instance",
+    "profiles",
+    "electron",
+    "windows"
+  ],
+  "author": "BLAIXY",
+  "license": "MIT",
+  "main": "src/main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test \"test/**/*.test.js\"",
+    "dist": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "dev.bunshin.claude",
+    "productName": "Bunshin",
+    "icon": "src/assets/icon.png",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "portable"
+    },
+    "portable": {
+      "artifactName": "Bunshin-${version}.exe"
+    }
+  },
+  "allowScripts": {
+    "electron@38.8.6": true,
+    "electron-winstaller@5.4.0": true
+  }
+}

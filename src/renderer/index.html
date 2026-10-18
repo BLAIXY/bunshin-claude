@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'">
+  <title>Bunshin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="logo">分</span>
+      <div>
+        <h1>Bunshin</h1>
+        <p class="sub">Several Claude Desktops side by side, one profile per instance</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="launchAll" class="ghost">Launch all</button>
+      <button id="newProfile" class="primary">+ New profile</button>
+    </div>
+  </header>
+
+  <div id="banner" class="banner hidden"></div>
+  <main id="grid" class="grid"></main>
+
+  <footer>
+    <span id="claudeInfo" class="muted"></span>
+    <label class="switch" title="Register Bunshin as the Windows handler for claude:// links (browser sign-in callbacks).">
+      <input type="checkbox" id="linkHandler">
+      <span class="track"></span>
+      Link routing
+    </label>
+  </footer>
+
+  <!-- create / edit -->
+  <dialog id="editDialog">
+    <form method="dialog" id="editForm">
+      <h2 id="editTitle">New profile</h2>
+      <label class="field">Name
+        <input id="editName" required maxlength="40" placeholder="Personal, Work, Client X…">
+      </label>
+      <div class="field">Color
+        <div id="editColors" class="swatches"></div>
+      </div>
+      <label class="check" id="editIsolateRow">
+        <input type="checkbox" id="editIsolate">
+        <span>Also isolate the Claude Code config (<code>CLAUDE_CONFIG_DIR</code>): memory, settings and MCP servers specific to this profile</span>
+      </label>
+      <label class="check" id="editShareRow">
+        <input type="checkbox" id="editShare">
+        <span>Share Claude Code session history with the other profiles (applied the next time this profile is launched)</span>
+      </label>
+      <p id="editPaths" class="paths"></p>
+      <p id="editError" class="error"></p>
+      <div class="row end">
+        <button value="cancel" formnovalidate class="ghost">Cancel</button>
+        <button id="editSubmit" value="ok" class="primary">Create</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- incoming claude:// link -->
+  <dialog id="linkDialog">
+    <h2>Sign-in link received</h2>
+    <p class="muted">Which profile should get this link?</p>
+    <code id="linkUrl" class="url"></code>
+    <div id="linkTargets" class="targets"></div>
+    <div class="row end">
+      <button id="linkDismiss" class="ghost">Ignore</button>
+    </div>
+  </dialog>
+
+  <!-- confirm -->
+  <dialog id="confirmDialog">
+    <form method="dialog">
+      <h2 id="confirmTitle"></h2>
+      <p id="confirmText" class="muted"></p>
+      <div class="row end">
+        <button value="cancel" class="ghost">Cancel</button>
+        <button value="ok" id="confirmOk" class="danger">Confirm</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="renderer.js"></script>
+</body>
+</html>
